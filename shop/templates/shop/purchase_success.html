@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head><title>Спасибо за покупку!</title></head>
+<body>
+    <h3>Спасибо за покупку, {{ person }}!</h3>
+    <p>Предмет роскоши "{{ product.name }}" будет доставлен по адресу:</p>
+    <p><strong>{{ object.address }}</strong></p>
+    <p>Цена: {{ product.price }} ₽</p>
+    <a href="{% url 'index' %}">← Вернуться в каталог</a>
+</body>
+</html>
