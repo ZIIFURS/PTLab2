@@ -2,22 +2,41 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Товары</title>
+    <title>Магазин предметов роскоши</title>
+    <style>
+        .out-of-stock { color: gray; }
+        .buy-btn { padding: 8px 16px; background: #1a1a1a; color: white; text-decoration: none; }
+        .buy-btn:disabled { background: #ccc; cursor: not-allowed; }
+    </style>
 </head>
 <body>
     <div>
-        <h3>Список</h3>
-        <table>
+        <h2>Эксклюзивные предметы роскоши</h2>
+        <table border="1" cellpadding="10">
             <tr>
-                <td><p>Наименование</p></td>
-                <td><p>Цена</p></td>
-                <td></td>
+                <th>Наименование</th>
+                <th>Цена</th>
+                <th>В наличии</th>
+                <th>Действие</th>
             </tr>
             {% for p in products %}
                 <tr>
-                    <td><p>{{ p.name }}</p></td>
-                    <td><p>{{ p.price }}</p></td>
-                    <td><p><a href="/buy/{{ p.id }}">Купить</a></p></td>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.price }} ₽</td>
+                    <td>
+                        {% if p.quantity > 0 %}
+                            {{ p.quantity }} шт.
+                        {% else %}
+                            <span class="out-of-stock">Нет в наличии</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if p.quantity > 0 %}
+                            <a href="{% url 'buy' p.id %}" class="buy-btn">Купить</a>
+                        {% else %}
+                            <span class="buy-btn" style="background:#ccc;cursor:not-allowed;">Купить</span>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>
